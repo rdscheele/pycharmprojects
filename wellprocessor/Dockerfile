@@ -1,4 +1,4 @@
 FROM python:3
-ADD well.py /
+ADD wellprocessor.py /
 RUN pip install azure-servicebus
-CMD [ "python", "./well.py" ]
+CMD [ "python", "./wellprocessor.py" ]

@@ -1,5 +1,5 @@
 FROM python:3
-ADD queue.py /
+ADD wellqueue.py /
 RUN pip install azure-servicebus
 RUN pip install kubernetes
-CMD [ "python", "./queue.py" ]
+CMD [ "python", "./wellqueue.py" ]
