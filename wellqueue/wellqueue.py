@@ -1,4 +1,7 @@
 import os
+import random
+import string
+
 from azure.servicebus import ServiceBusService
 from kubernetes import client, config
 import time
@@ -12,22 +15,22 @@ bus_service = ServiceBusService(
 
 
 def make_container():
-    container = client.V1Container()
+    container = client.V1Container(name="worker")
     container.image = "rdscheele/wellprocessor:v2"
-    container.name = "worker"
     return container
 
 
 def make_job():
     job = client.V1Job()
+    job.api_version = "batch/v1"
+    job.kind = "Job"
     job.metadata = client.V1ObjectMeta()
-    job.spec = client.V1JobSpec()
-    job.spec.template = client.V1PodTemplate()
-    job.spec.template.spec = client.V1PodTemplateSpec()
+    job.metadata.name = ''.join(random.choices(string.ascii_lowercase, k=8))
+    job.spec = client.V1JobSpec(template=client.V1PodTemplate)
+    job.spec.template = client.V1PodTemplateSpec()
+    job.spec.template.spec = client.V1PodSpec(containers=[make_container()])
     job.spec.template.spec.restart_policy = "Never"
-    job.spec.template.spec.containers = [
-        make_container()
-    ]
+
     return job
 
 
