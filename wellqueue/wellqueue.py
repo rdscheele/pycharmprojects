@@ -16,7 +16,7 @@ bus_service = ServiceBusService(
 
 def make_container():
     container = client.V1Container(name="worker")
-    container.image = "rdscheele/wellprocessor:latest"
+    container.image = "rdscheele/wellprocessor"
     return container
 
 

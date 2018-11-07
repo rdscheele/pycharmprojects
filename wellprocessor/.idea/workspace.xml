@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bacc5b20-2242-42bf-a950-6c6fa5b50a81" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wellprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/wellprocessor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wellqueue/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wellqueue/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wellqueue/wellqueue.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wellqueue/wellqueue.py" afterDir="false" />
     </list>
