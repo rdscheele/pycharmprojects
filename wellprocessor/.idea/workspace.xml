@@ -4,11 +4,9 @@
     <list default="true" id="bacc5b20-2242-42bf-a950-6c6fa5b50a81" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/well.py" beforeDir="false" afterPath="$PROJECT_DIR$/wellprocessor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wellqueue/.idea/wellqueue.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../wellqueue/.idea/wellqueue.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wellprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/wellprocessor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wellqueue/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wellqueue/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wellqueue/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../wellqueue/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wellqueue/queue.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wellqueue/wellqueue.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wellqueue/wellqueue.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wellqueue/wellqueue.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,42 +18,43 @@
     <session id="757271181">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
-          <entry key="project.open.time.0" value="5" />
+          <entry key="project.closed" value="12" />
+          <entry key="project.open.time.0" value="6" />
           <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.24" value="1" />
-          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.opened" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="Dockerfile" value="2" />
+          <entry key="Dockerfile" value="3" />
           <entry key="py" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Dockerfile" value="1" />
+          <entry key="Dockerfile" value="2" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Python" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Dockerfile" value="93" />
+          <entry key="Dockerfile" value="110" />
           <entry key="dummy" value="14" />
-          <entry key="py" value="232" />
+          <entry key="py" value="1069" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dockerfile" value="20" />
+          <entry key="Dockerfile" value="37" />
           <entry key="PLAIN_TEXT" value="87" />
-          <entry key="Python" value="232" />
+          <entry key="Python" value="1069" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -66,8 +65,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wellprocessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="391">
+              <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -90,14 +92,15 @@
         <option value="$PROJECT_DIR$/well.py" />
         <option value="$PROJECT_DIR$/queue.py" />
         <option value="$PROJECT_DIR$/Dockerfile" />
+        <option value="$PROJECT_DIR$/wellprocessor.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="2260" />
+    <option name="y" value="-10" />
+    <option name="width" value="1920" />
+    <option name="height" value="1030" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -202,22 +205,22 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="1913" y="-7" width="2062" height="1126" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3344349" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18469135" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4976867" weight="0.32907802" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997986" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49530864" visible="true" weight="0.3282981" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4982716" weight="0.3997986" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4997531" weight="0.32930514" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50231326" side_tool="true" visible="true" weight="0.32907802" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50469136" side_tool="true" visible="true" weight="0.3282981" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32930514" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -229,6 +232,15 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="msg" />
@@ -240,14 +252,17 @@
     <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/wellprocessor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="391">
+          <caret line="23" column="27" lean-forward="true" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
