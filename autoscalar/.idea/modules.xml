@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../autoscalar/.idea/autoscalar.iml" filepath="$PROJECT_DIR$/../autoscalar/.idea/autoscalar.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/autoscaler.iml" filepath="$PROJECT_DIR$/.idea/autoscaler.iml" />
     </modules>
   </component>
 </project>
