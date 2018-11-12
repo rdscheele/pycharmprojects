@@ -13,36 +13,14 @@ bus_service = ServiceBusService(
     shared_access_key_name='master',
     shared_access_key_value='2uWqgYUl+0PZerFo4qrVPLj1pOiaZGUHDDnXc8I8Umg=')
 
-
-def make_container():
-    container = client.V1Container(name="worker")
-    container.image = "rdscheele/wellprocessor"
-    return container
-
-
-def make_job():
-    job = client.V1Job()
-    job.api_version = "batch/v1"
-    job.kind = "Job"
-    job.metadata = client.V1ObjectMeta()
-    job.metadata.name = ''.join(random.choices(string.ascii_lowercase, k=8))
-    job.spec = client.V1JobSpec(template=client.V1PodTemplate)
-    job.spec.template = client.V1PodTemplateSpec()
-    job.spec.template.spec = client.V1PodSpec(containers=[make_container()])
-    job.spec.template.spec.restart_policy = "Never"
-
-    return job
-
-
-def update_queue(batch):
+def update_scaling(deployment):
     message_count = bus_service.get_queue('wellqueue').message_count
 
     if message_count != 0:
         for i in range(0, message_count):
-            job = make_job()
-            batch.create_namespaced_job(namespace, job)
-            print('Created job')
-            time.sleep(60)
+            q = 0  # nyi
+    else:
+        g = 0  # nyi
 
 
 if os.getenv('KUBERNETES_SERVICE_HOST'):
@@ -50,8 +28,8 @@ if os.getenv('KUBERNETES_SERVICE_HOST'):
 else:
     config.load_kube_config()
 
-batch = client.BatchV1Api()
+deployment = client.V1De()
 
 while True:
-    update_queue(batch)
+    update_scaling(deployment)
     time.sleep(10)
