@@ -69,7 +69,7 @@ def scale_up():
     deployment = client.AppsV1Api().read_namespaced_deployment(name='scaling-processor', namespace='default')
     current_replicas = deployment.spec.replicas
 
-    if not current_replicas <= max_replicas:
+    if current_replicas < max_replicas:
         deployment.spec.replicas = current_replicas + 1
         client.AppsV1Api().patch_namespaced_deployment(name='scaling-processor', namespace='default', body=deployment)
     else:
@@ -85,7 +85,7 @@ def scale_down():
     deployment = client.AppsV1Api().read_namespaced_deployment(name='scaling-processor', namespace='default')
     current_replicas = deployment.spec.replicas
 
-    if not current_replicas >= min_replicas:
+    if current_replicas > min_replicas:
         deployment.spec.replicas = current_replicas - 1
         client.AppsV1Api().patch_namespaced_deployment(name='scaling-processor', namespace='default', body=deployment)
     else:
