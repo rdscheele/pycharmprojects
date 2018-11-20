@@ -20,27 +20,27 @@ def make_container():
     return container
 
 
-def make_job():
-    job = client.V1Job()
-    job.api_version = "batch/v1"
-    job.kind = "Job"
-    job.metadata = client.V1ObjectMeta()
-    job.metadata.name = ''.join(random.choices(string.ascii_lowercase, k=8))
-    job.spec = client.V1JobSpec(template=client.V1PodTemplate)
-    job.spec.template = client.V1PodTemplateSpec()
-    job.spec.template.spec = client.V1PodSpec(containers=[make_container()])
-    job.spec.template.spec.restart_policy = "Never"
-    return job
+def make_pod():
+    pod = client.V1Job()
+    pod.api_version = "v1"
+    pod.kind = "Pod"
+    pod.metadata = client.V1ObjectMeta()
+    pod.metadata.name = 'pod-wellprocessor-'.join(random.choices(string.ascii_lowercase, k=8))
+    container = make_container()
+    pod.spec = client.V1PodSpec(containers=[container])
+    pod.spec.restart_policy = "Never"
+
+    return pod
 
 
-def update_queue(batch):
+def update_queue(core):
     message_count = bus_service.get_queue('wellqueue').message_count
 
     if message_count != 0:
         for i in range(0, message_count):
-            job = make_job()
-            batch.create_namespaced_job(namespace, job)
-            print('Created job')
+            pod = make_pod()
+            core.create_namespaced_pod(namespace, pod)
+            print('Created pod')
             time.sleep(60)
 
 
@@ -49,8 +49,10 @@ if os.getenv('KUBERNETES_SERVICE_HOST'):
 else:
     config.load_kube_config()
 
-batch = client.BatchV1Api()
+core = client.CoreV1Api()
 
+config_map = core.list_namespaced_config_map(namespace='default')
+print(config_map)
 #while True:
-update_queue(batch)
+#update_queue(core)
 #time.sleep(10)

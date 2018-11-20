@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bacc5b20-2242-42bf-a950-6c6fa5b50a81" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../autoscalar/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../autoscalar/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../autoscalar/scale.py" beforeDir="false" afterPath="$PROJECT_DIR$/../autoscalar/scale.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wellqueue/podqueue/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wellqueue/podqueue/podqueue.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scalingqueue/scalingprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/scalingqueue/scalingprocessor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wellprocessor/wellprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/wellprocessor/wellprocessor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wellqueue/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wellqueue/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wellqueue/jobqueue/jobqueue.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wellqueue/jobqueue/jobqueue.py" afterDir="false" />
     </list>
@@ -65,10 +63,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wellprocessor/wellprocessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
+            <state relative-caret-position="401">
               <caret line="32" column="143" selection-start-line="32" selection-start-column="143" selection-end-line="32" selection-end-column="143" />
               <folding>
                 <element signature="e#0#62#0" expanded="true" />
@@ -77,7 +75,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scalingqueue/scalingprocessor.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="595">
@@ -116,11 +114,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="3125" />
-    <option name="y" value="-10" />
-    <option name="width" value="2580" />
-    <option name="height" value="1085" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="2232" />
+    <option name="y" value="-9" />
+    <option name="width" value="1937" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -263,8 +261,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1913" y="-7" width="2062" height="1126" extended-state="6" />
-    <editor active="true" />
+    <frame x="1913" y="-7" width="2062" height="1126" extended-state="7" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1708642" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -321,22 +318,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wellprocessor/wellprocessor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="143" selection-start-line="32" selection-start-column="143" selection-end-line="32" selection-end-column="143" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scalingqueue/scalingprocessor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="35" column="147" selection-start-line="35" selection-start-column="147" selection-end-line="35" selection-end-column="147" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wellprocessor/wellprocessor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="32" column="143" selection-start-line="32" selection-start-column="143" selection-end-line="32" selection-end-column="143" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
