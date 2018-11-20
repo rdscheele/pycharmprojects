@@ -2,18 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bacc5b20-2242-42bf-a950-6c6fa5b50a81" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../autoscalar/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../autoscalar/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../autoscalar/scale.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wellprocessor/wellprocessor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../autoscaler/.idea/autoscaler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../autoscalar/.idea/autoscalar.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../autoscaler/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../autoscalar/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../autoscaler/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../autoscaler/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../autoscaler/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../autoscalar/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../autoscaler/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../autoscaler/scale.py" beforeDir="false" afterPath="$PROJECT_DIR$/wellprocessor/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../autoscalar/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../autoscalar/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../autoscalar/scale.py" beforeDir="false" afterPath="$PROJECT_DIR$/../autoscalar/scale.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scalingqueue/scalingprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/scalingqueue/scalingprocessor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wellprocessor/wellprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/wellprocessor/wellprocessor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wellqueue/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wellqueue/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wellqueue/jobqueue/jobqueue.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wellqueue/jobqueue/jobqueue.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,9 +20,9 @@
     <session id="757271181">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="18" />
-          <entry key="project.open.time.0" value="9" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.closed" value="19" />
+          <entry key="project.open.time.0" value="10" />
+          <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.24" value="1" />
@@ -35,34 +30,34 @@
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="20" />
+          <entry key="project.opened" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Dockerfile" value="7" />
-          <entry key="py" value="3" />
+          <entry key="py" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Dockerfile" value="6" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="3" />
+          <entry key="Python" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Dockerfile" value="129" />
           <entry key="dummy" value="21" />
-          <entry key="py" value="2643" />
+          <entry key="py" value="2949" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Dockerfile" value="56" />
           <entry key="PLAIN_TEXT" value="94" />
-          <entry key="Python" value="2643" />
+          <entry key="Python" value="2949" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -70,11 +65,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/wellprocessor/wellprocessor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="51" column="48" lean-forward="true" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
+            <state relative-caret-position="544">
+              <caret line="32" column="143" selection-start-line="32" selection-start-column="143" selection-end-line="32" selection-end-column="143" />
+              <folding>
+                <element signature="e#0#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scalingqueue/scalingprocessor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="35" column="147" selection-start-line="35" selection-start-column="147" selection-end-line="35" selection-end-column="147" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -103,16 +110,17 @@
         <option value="$PROJECT_DIR$/wellprocessor.py" />
         <option value="$PROJECT_DIR$/jobqueue/wellprocessor.py" />
         <option value="$PROJECT_DIR$/scalingqueue/Dockerfile" />
-        <option value="$PROJECT_DIR$/wellprocessor/wellprocessor.py" />
         <option value="$PROJECT_DIR$/wellprocessor/Dockerfile" />
+        <option value="$PROJECT_DIR$/wellprocessor/wellprocessor.py" />
+        <option value="$PROJECT_DIR$/scalingqueue/scalingprocessor.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="x" value="3125" />
+    <option name="y" value="-10" />
+    <option name="width" value="2580" />
+    <option name="height" value="1085" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -164,7 +172,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.well">
+  <component name="RunManager" selected="Python.wellprocessor">
     <configuration name="queue" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="wellprocessor" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -207,12 +215,35 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="wellprocessor" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="wellprocessor" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/wellprocessor" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wellprocessor/wellprocessor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.well" />
       <item itemvalue="Python.queue" />
+      <item itemvalue="Python.wellprocessor" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.wellprocessor" />
         <item itemvalue="Python.well" />
         <item itemvalue="Python.queue" />
       </list>
@@ -232,22 +263,22 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="1913" y="-7" width="2062" height="1126" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22868474" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1708642" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.494321" weight="0.3282981" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4977778" weight="0.3997986" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49333334" weight="0.3282981" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4962963" weight="0.3997986" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4997531" weight="0.32930514" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="9" sideWeight="0.505679" side_tool="true" visible="true" weight="0.24397163" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5037037" side_tool="true" weight="0.3997986" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32930514" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -276,16 +307,6 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/queue.py" />
-    <entry file="file://$PROJECT_DIR$/scalingqueue/scalingprocessor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="38" lean-forward="true" selection-end-line="63" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/wellprocessor/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -302,8 +323,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wellprocessor/wellprocessor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="51" column="48" lean-forward="true" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
+        <state relative-caret-position="544">
+          <caret line="32" column="143" selection-start-line="32" selection-start-column="143" selection-end-line="32" selection-end-column="143" />
+          <folding>
+            <element signature="e#0#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scalingqueue/scalingprocessor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" column="147" selection-start-line="35" selection-start-column="147" selection-end-line="35" selection-end-column="147" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

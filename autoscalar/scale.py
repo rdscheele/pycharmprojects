@@ -15,7 +15,7 @@ deployment_to_scale_name = 'scaling-processor'
 # Time between checking on scaling up and scaling down. Set to 0 if no waiter has to be implemented.
 waiter = 5
 min_replicas = 0
-max_replicas = 10
+max_replicas = 30
 target_cpu_utilization_percentage = 70
 scale_up_messages = 20
 scale_down_messages = 10
@@ -94,7 +94,6 @@ def scale_down():
 # auto_scalar = make_auto_scalar(min_replicas, max_replicas, target_cpu_utilization_percentage)
 # pods = client.CoreV1Api().list_pod_for_all_namespaces()
 
-scale_up()
 
 while True:
     number_of_messages = get_number_of_service_bus_queue_items()

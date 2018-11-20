@@ -33,7 +33,7 @@ while True:
 
         # Connect to blob service
         block_blob_service = BlockBlobService(account_name='bbwelldata',
-                                              account_key='fK2i08pNdKOB6nHQYwvvS42EJBegLRlHvqz3IBKsxMkVhkfjmNQJMLzZjFJ71Mnf5+G67t4ajR6usvHLNJVilA==')
+                                              account_key='jH9MnJI2M7QMZAgAmmYybD7fUYKIzWg45q6lmZqEO4QuhtP1qy3ocsB8YuBuAdEFwgbJFpE1XIGn/ywmSWlrkg==')
 
         # Create a list of blobs within the containers
         blob_list = block_blob_service.list_blobs(container_name)
@@ -47,6 +47,7 @@ while True:
                 time_start = time.time()
                 random_number = random.randint(1, 20)
                 for i in range(1, random_number):
+                    a = bytearray(812000000)
                     getcontext().prec = 100
                     random_number = random.randint(100000, 800000)
                     pi = sum(1 / Decimal(16) ** k *

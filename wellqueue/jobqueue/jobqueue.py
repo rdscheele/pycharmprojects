@@ -42,7 +42,7 @@ def update_queue(batch):
             job = make_job()
             batch.create_namespaced_job(namespace, job)
             print('Created job')
-            time.sleep(60)
+            #time.sleep(60)
 
 
 if os.getenv('KUBERNETES_SERVICE_HOST'):
@@ -52,6 +52,6 @@ else:
 
 batch = client.BatchV1Api()
 
-while True:
-    update_queue(batch)
-    time.sleep(10)
+#while True:
+update_queue(batch)
+#time.sleep(10)
