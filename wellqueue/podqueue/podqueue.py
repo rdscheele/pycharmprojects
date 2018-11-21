@@ -1,17 +1,19 @@
 import os
 import random
 import string
-
 from azure.servicebus import ServiceBusService
 from kubernetes import client, config
 import time
 
 namespace = "default"
 
+service_bus_key = open('C:/Users/r.d.scheele/OneDrive - Betabit/Keys/service_bus_key.txt', 'r').read()
 bus_service = ServiceBusService(
     service_namespace='wellprototype',
     shared_access_key_name='master',
-    shared_access_key_value='2uWqgYUl+0PZerFo4qrVPLj1pOiaZGUHDDnXc8I8Umg=')
+    shared_access_key_value=service_bus_key)
+storage_account_name = 'bbwelldata'
+storage_account_key = open('C:/Users/r.d.scheele/OneDrive - Betabit/Keys/storage_account_key.txt', 'r').read()
 
 
 def deconstruct_message():
@@ -37,13 +39,16 @@ def make_container():
     container.resources.limits = {'cpu': '0.7', 'memory': '2000Mi'}
     # Declare environment variables with well id
     container_name, blob_item = deconstruct_message()
-    env_var_container_name = client.V1EnvVar()
-    env_var_container_name.name = 'CONTAINER_NAME'
+    env_var_container_name = client.V1EnvVar(name='CONTAINER_NAME')
     env_var_container_name.value = container_name
-    env_var_blob_item = client.V1EnvVar()
-    env_var_blob_item.name = 'BLOB_ITEM'
+    env_var_blob_item = client.V1EnvVar(name='BLOB_ITEM')
     env_var_blob_item.value = blob_item
-    container.env = [env_var_container_name, env_var_blob_item]
+    env_var_storage_account_name = client.V1EnvVar(name='STORAGE_ACCOUNT_NAME')
+    env_var_storage_account_name.value = storage_account_name
+    env_var_storage_account_key = client.V1EnvVar(name='STORAGE_ACCOUNT_KEY')
+    env_var_storage_account_key.value = storage_account_key
+    container.env = [env_var_container_name, env_var_blob_item, env_var_storage_account_name,
+                     env_var_storage_account_key]
     return container
 
 
@@ -57,7 +62,6 @@ def make_pod():
     pod.spec = client.V1PodSpec(containers=[container])
     pod.spec.restart_policy = "Never"
     pod.spec.termination_grace_period_seconds = 30
-
     return pod
 
 
