@@ -8,8 +8,8 @@ if os.getenv('KUBERNETES_SERVICE_HOST'):
     blob_item = os.environ['BLOB_ITEM']
     storage_account_name = os.environ['STORAGE_ACCOUNT_NAME']
     storage_account_key = os.environ['STORAGE_ACCOUNT_KEY']
-    memory_usage = os.environ['FAKE_MEMORY_USAGE']
-    cpu_usage = os.environ['FAKE_CPU_USAGE']
+    memory_usage = int(os.environ['FAKE_MEMORY_USAGE'])
+    cpu_usage = int(os.environ['FAKE_CPU_USAGE'])
 else:
     container_name = 'test'
     with open('C:/Users/r.d.scheele/OneDrive - Betabit/Keys/storage_account_key.txt', 'r') as myfile:

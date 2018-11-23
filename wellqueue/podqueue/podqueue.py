@@ -15,9 +15,6 @@ bus_service = ServiceBusService(
 storage_account_name = 'bbwelldata'
 storage_account_key = open('C:/Users/r.d.scheele/OneDrive - Betabit/Keys/storage_account_key.txt', 'r').read()
 
-fake_memory_usage = 500000
-fake_cpu_usage = 10
-
 if os.getenv('KUBERNETES_SERVICE_HOST'):
     config.load_incluster_config()
 else:
@@ -27,6 +24,7 @@ core = client.CoreV1Api()
 
 
 # Deconstruct a queue message as list
+# Message format subdomain;messageId;numberOfMessagesInBatch;fakeCpuValueToBeUsed;fakeMemoryValueToBeUsed
 def deconstruct_message(msg):
     msg_body = str(msg.body)
     msg_body = msg_body[2:]
@@ -34,18 +32,48 @@ def deconstruct_message(msg):
     msg_list = msg_body.split(';')
     container_name = msg_list[0]
     blob_item = msg_list[1]
-    return container_name, blob_item
+    cpu_usage = msg_list[3]
+    memory_usage = msg_list[4]
+    return container_name, blob_item, cpu_usage, memory_usage
+
+
+def calculate_required_resources(cpu, memory):
+    min_cpu = '0'
+    max_cpu = '0'
+    if cpu == '2':
+        min_cpu = '.1'
+        max_cpu = '.2'
+    elif cpu == '5':
+        min_cpu = '.2'
+        max_cpu = '.4'
+    elif cpu == '20':
+        min_cpu = '.5'
+        max_cpu = '1.0'
+    min_mem = '0'
+    max_mem = '0'
+    if memory == '100000000':
+        min_mem = '100000000'
+        max_mem = '105000000'
+    elif memory == '200000000':
+        min_mem = '200000000'
+        max_mem = '210000000'
+    elif memory == '700000000':
+        min_mem = '700000000'
+        max_mem = '800000000'
+    return min_cpu, max_cpu, min_mem, max_mem
 
 
 def make_container(msg):
     container = client.V1Container(name="worker")
-    container.image = "rdscheele/wellprocessor"
+    container.image = "rdscheele/wellprocessor:v13"
     # Declare required and max resources
+    container_name, blob_item, fake_cpu_usage, fake_memory_usage = deconstruct_message(msg)
+    min_cpu, max_cpu, min_mem, max_mem = calculate_required_resources(fake_cpu_usage, fake_memory_usage)
+
     container.resources = client.V1ResourceRequirements()
-    #container.resources.requests = {'cpu': '0.5', 'memory': '1000Mi'}
-    #container.resources.limits = {'cpu': '0.7', 'memory': '2000Mi'}
+    container.resources.requests = {'cpu': min_cpu, 'memory': min_mem}
+    container.resources.limits = {'cpu': max_cpu, 'memory': max_mem}
     # Declare environment variables with well id
-    container_name, blob_item = deconstruct_message(msg)
     env_var_container_name = client.V1EnvVar(name='CONTAINER_NAME')
     env_var_container_name.value = container_name
     env_var_blob_item = client.V1EnvVar(name='BLOB_ITEM')
@@ -59,16 +87,17 @@ def make_container(msg):
     env_var_fake_cpu_usage = client.V1EnvVar(name='FAKE_CPU_USAGE')
     env_var_fake_cpu_usage.value = fake_cpu_usage
     container.env = [env_var_container_name, env_var_blob_item, env_var_storage_account_name,
-                     env_var_storage_account_key]
+                     env_var_storage_account_key, env_var_fake_memory_usage, env_var_fake_cpu_usage]
     return container
 
 
 def make_pod(msg):
+    container_name, blob_item, fake_cpu_usage, fake_memory_usage = deconstruct_message(msg)
     pod = client.V1Job()
     pod.api_version = "v1"
     pod.kind = "Pod"
     pod.metadata = client.V1ObjectMeta()
-    pod.metadata.name = 'pod-wellprocessor-'.join(random.choices(string.ascii_lowercase, k=8))
+    pod.metadata.name = 'wellprocessor-' + fake_cpu_usage + '-' + fake_memory_usage + '-' + ''.join(random.choices(string.ascii_lowercase, k=20))
     container = make_container(msg)
     pod.spec = client.V1PodSpec(containers=[container])
     pod.spec.restart_policy = "Never"
@@ -99,17 +128,18 @@ while True:
     for item in pod_list.items:
         if item.status.phase == 'Succeeded':
             delete_options = client.V1DeleteOptions()
-            #core.delete_namespaced_pod(name=item.metadata.name, namespace='default', body=delete_options)
+            core.delete_namespaced_pod(name=item.metadata.name, namespace='default', body=delete_options)
             print('Removed terminated pod!')
 
     message_count = bus_service.get_queue('wellqueue').message_count
 
     if message_count != 0:
-        max_cpu, max_ram, curr_cpu, curr_ram = cluster_resources()
+        # max_cpu, max_ram, curr_cpu, curr_ram = cluster_resources()
         # Get the top most message
+        print('Creating a pod!')
         message = bus_service.receive_queue_message('wellqueue', peek_lock=False)
         update_queue(message)
 
 
 
-    time.sleep(10)
+    time.sleep(2)
