@@ -63,9 +63,9 @@ def calculate_required_resources(cpu, memory):
     return min_cpu, max_cpu, min_mem#, max_mem
 
 
-def make_container(msg):
+def make_container(msg, pod_id):
     container = client.V1Container(name="worker")
-    container.image = "rdscheele/wellprocessor:v16"
+    container.image = "rdscheele/wellprocessor:v18"
     # Declare required and max resources
     container_name, blob_item, fake_cpu_usage, fake_memory_usage = deconstruct_message(msg)
     min_cpu, max_cpu, min_mem = calculate_required_resources(fake_cpu_usage, fake_memory_usage)
@@ -86,8 +86,10 @@ def make_container(msg):
     env_var_fake_memory_usage.value = fake_memory_usage
     env_var_fake_cpu_usage = client.V1EnvVar(name='FAKE_CPU_USAGE')
     env_var_fake_cpu_usage.value = fake_cpu_usage
+    env_var_pod_id = client.V1EnvVar(name='POD_ID')
+    env_var_pod_id.value = pod_id
     container.env = [env_var_container_name, env_var_blob_item, env_var_storage_account_name,
-                     env_var_storage_account_key, env_var_fake_memory_usage, env_var_fake_cpu_usage]
+                     env_var_storage_account_key, env_var_fake_memory_usage, env_var_fake_cpu_usage, env_var_pod_id]
     return container
 
 
@@ -97,18 +99,19 @@ def make_pod(msg):
     pod.api_version = "v1"
     pod.kind = "Pod"
     pod.metadata = client.V1ObjectMeta()
-    pod.metadata.name = 'wellprocessor-' + fake_cpu_usage + '-' + fake_memory_usage + '-' + ''.join(random.choices(string.ascii_lowercase, k=20))
-    container = make_container(msg)
+    pod_id = ''.join(random.choices(string.ascii_lowercase, k=20))
+    pod.metadata.name = 'wellprocessor-' + fake_cpu_usage + '-' + fake_memory_usage + '-' + pod_id
+    container = make_container(msg, pod_id)
     pod.spec = client.V1PodSpec(containers=[container])
     pod.spec.restart_policy = "OnFailure"
     pod.spec.termination_grace_period_seconds = 30
+    print('Created pod for message ' + str(bus_service.receive_queue_message('wellqueue', peek_lock=True).body) + ' with ID ' + pod_id)
     return pod
 
 
 def update_queue(msg):
     pod = make_pod(msg)
     core.create_namespaced_pod(namespace, pod)
-    print('Created pod for message ' + str(bus_service.receive_queue_message('wellqueue', peek_lock=True).body))
 
 
 def cluster_resources():

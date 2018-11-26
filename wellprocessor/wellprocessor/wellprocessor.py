@@ -11,6 +11,7 @@ if os.getenv('KUBERNETES_SERVICE_HOST'):
     storage_account_key = os.environ['STORAGE_ACCOUNT_KEY']
     memory_usage = int(os.environ['FAKE_MEMORY_USAGE'])
     cpu_usage = int(os.environ['FAKE_CPU_USAGE'])
+    pod_id = os.environ['POD_ID']
 else:
     container_name = 'test'
     with open('C:/Users/r.d.scheele/OneDrive - Betabit/Keys/storage_account_key.txt', 'r') as myfile:
@@ -19,6 +20,9 @@ else:
     blob_item = 'vlag_met_geit.jpg'
     memory_usage = 400000000
     cpu_usage = 10
+    pod_id = 'INVALID'
+
+print('This pod has ID ' + pod_id)
 
 # Connect to blob service
 block_blob_service = BlockBlobService(account_name=storage_account_name, account_key=storage_account_key)
