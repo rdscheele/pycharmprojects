@@ -2,6 +2,7 @@ import os
 from azure.storage.blob import BlockBlobService
 import time
 from decimal import Decimal, getcontext
+import psutil
 
 if os.getenv('KUBERNETES_SERVICE_HOST'):
     container_name = os.environ['CONTAINER_NAME']
@@ -16,7 +17,7 @@ else:
         storage_account_key = myfile.read()
     storage_account_name = 'bbwelldata'
     blob_item = 'vlag_met_geit.jpg'
-    memory_usage = 412000000
+    memory_usage = 400000000
     cpu_usage = 10
 
 # Connect to blob service
@@ -30,7 +31,8 @@ for item in blob_list:
         # download_path = './downloads/' + blob_name
         # block_blob_service.get_blob_to_path(container_name, blob_name, download_path)
         # print('Downloaded BLOB to ./downloads/ with name: ' + blob_name)
-
+        time.sleep(2)
+        print(psutil.virtual_memory())
         time_start = time.time()
         pi = 0
         for i in range(1, cpu_usage):
@@ -41,7 +43,13 @@ for item in blob_list:
                       Decimal(2) / (8 * k + 4) -
                       Decimal(1) / (8 * k + 5) -
                       Decimal(1) / (8 * k + 6)) for k in range(500000))
+            time.sleep(2)
+            print(psutil.virtual_memory())
         print('Pi is calculated to be ' + str(pi) + ' ')
         time_end = time.time()
         time_diff = time_end - time_start
+        time.sleep(2)
+        print(psutil.virtual_memory())
         print('Time required to calculate was ' + str(time_diff) + ' seconds for BLOB container item ' + str(blob_item))
+        time.sleep(2)
+        print(psutil.virtual_memory())

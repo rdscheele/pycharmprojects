@@ -50,29 +50,29 @@ def calculate_required_resources(cpu, memory):
         min_cpu = '.5'
         max_cpu = '1.0'
     min_mem = '0'
-    max_mem = '0'
+    #max_mem = '0'
     if memory == '100000000':
-        min_mem = '100000000'
-        max_mem = '105000000'
-    elif memory == '200000000':
-        min_mem = '200000000'
-        max_mem = '210000000'
+        min_mem = '150Mi'
+        #max_mem = '150Mi'
+    elif memory == '400000000':
+        min_mem = '500Mi'
+        #max_mem = '850Mi'
     elif memory == '700000000':
-        min_mem = '700000000'
-        max_mem = '800000000'
-    return min_cpu, max_cpu, min_mem, max_mem
+        min_mem = '800Mi'
+        #max_mem = '2000Mi'
+    return min_cpu, max_cpu, min_mem#, max_mem
 
 
 def make_container(msg):
     container = client.V1Container(name="worker")
-    container.image = "rdscheele/wellprocessor:v13"
+    container.image = "rdscheele/wellprocessor:v16"
     # Declare required and max resources
     container_name, blob_item, fake_cpu_usage, fake_memory_usage = deconstruct_message(msg)
-    min_cpu, max_cpu, min_mem, max_mem = calculate_required_resources(fake_cpu_usage, fake_memory_usage)
+    min_cpu, max_cpu, min_mem = calculate_required_resources(fake_cpu_usage, fake_memory_usage)
 
     container.resources = client.V1ResourceRequirements()
     container.resources.requests = {'cpu': min_cpu, 'memory': min_mem}
-    container.resources.limits = {'cpu': max_cpu, 'memory': max_mem}
+    #container.resources.limits = {'cpu': max_cpu, 'memory': max_mem}
     # Declare environment variables with well id
     env_var_container_name = client.V1EnvVar(name='CONTAINER_NAME')
     env_var_container_name.value = container_name
@@ -100,7 +100,7 @@ def make_pod(msg):
     pod.metadata.name = 'wellprocessor-' + fake_cpu_usage + '-' + fake_memory_usage + '-' + ''.join(random.choices(string.ascii_lowercase, k=20))
     container = make_container(msg)
     pod.spec = client.V1PodSpec(containers=[container])
-    pod.spec.restart_policy = "Never"
+    pod.spec.restart_policy = "OnFailure"
     pod.spec.termination_grace_period_seconds = 30
     return pod
 
@@ -125,11 +125,12 @@ def cluster_resources():
 while True:
     # Cleanup completed pods
     pod_list = core.list_namespaced_pod(namespace='default')
+    '''
     for item in pod_list.items:
         if item.status.phase == 'Succeeded':
             delete_options = client.V1DeleteOptions()
             core.delete_namespaced_pod(name=item.metadata.name, namespace='default', body=delete_options)
-            print('Removed terminated pod!')
+            print('Removed terminated pod!')'''
 
     message_count = bus_service.get_queue('wellqueue').message_count
 

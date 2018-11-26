@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/podqueue/podqueue.py" line="139" mnemonic="1" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="9ef9f7d5-3d5b-4eb7-b6a8-fa1d8446f6d5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../wellprocessor/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wellprocessor/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wellprocessor/wellprocessor/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../wellprocessor/wellprocessor/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wellprocessor/wellprocessor/wellprocessor.py" beforeDir="false" afterPath="$PROJECT_DIR$/../wellprocessor/wellprocessor/wellprocessor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/podqueue/podqueue.py" beforeDir="false" afterPath="$PROJECT_DIR$/podqueue/podqueue.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,41 +21,41 @@
     <session id="-181440333">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
-          <entry key="project.open.time.0" value="5" />
+          <entry key="project.closed" value="11" />
+          <entry key="project.open.time.0" value="6" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Dockerfile" value="6" />
-          <entry key="py" value="35" />
+          <entry key="py" value="38" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Dockerfile" value="6" />
-          <entry key="Python" value="35" />
+          <entry key="Python" value="38" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Dockerfile" value="43" />
           <entry key="dummy" value="37" />
-          <entry key="py" value="4241" />
+          <entry key="py" value="4533" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Dockerfile" value="43" />
           <entry key="PLAIN_TEXT" value="37" />
-          <entry key="Python" value="4241" />
+          <entry key="Python" value="4533" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -61,13 +66,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/podqueue/podqueue.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-760">
-              <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
+            <state relative-caret-position="432">
+              <caret line="102" column="40" selection-start-line="102" selection-start-column="40" selection-end-line="102" selection-end-column="40" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <marker date="1542981355456" expanded="true" signature="1181:1826" ph="..." />
-                <marker date="1542981355456" expanded="true" signature="1266:1826" ph="..." />
-                <marker date="1542981355456" expanded="true" signature="4203:4441" ph="..." />
+                <marker date="1543243888576" expanded="true" signature="1181:1808" ph="..." />
               </folding>
             </state>
           </provider>
@@ -85,6 +88,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>max_cpu</find>
+      <find>dead</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -106,10 +110,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1911" />
-    <option name="y" value="-9" />
-    <option name="width" value="2578" />
-    <option name="height" value="1408" />
+    <option name="x" value="1910" />
+    <option name="y" value="-10" />
+    <option name="width" value="2580" />
+    <option name="height" value="1410" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -123,6 +127,11 @@
             <path>
               <item name="wellqueue" type="b2602c69:ProjectViewProjectNode" />
               <item name="wellqueue" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wellqueue" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wellqueue" type="462c0819:PsiDirectoryNode" />
+              <item name="jobqueue" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wellqueue" type="b2602c69:ProjectViewProjectNode" />
@@ -236,8 +245,8 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2960725" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.26384693" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.20946626" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.31923464" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -255,9 +264,19 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/podqueue/podqueue.py</url>
+          <line>134</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="job" />
+        <watch expression="pod_list.items[96].spec" />
       </configuration>
     </watches-manager>
   </component>
@@ -399,24 +418,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jobqueue/jobqueue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="44" lean-forward="true" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/kubernetes/client/models/v1_env_var.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
           <caret line="54" selection-start-line="54" selection-end-line="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/azure/servicebus/servicebusservice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7481">
-          <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -427,15 +432,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/jobqueue/jobqueue.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="41" column="44" lean-forward="true" selection-start-line="41" selection-start-column="44" selection-end-line="41" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/azure/servicebus/servicebusservice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="1055" column="8" selection-start-line="1055" selection-start-column="8" selection-end-line="1055" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/podqueue/podqueue.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-760">
-          <caret line="61" column="21" selection-start-line="61" selection-start-column="21" selection-end-line="61" selection-end-column="21" />
+        <state relative-caret-position="432">
+          <caret line="102" column="40" selection-start-line="102" selection-start-column="40" selection-end-line="102" selection-end-column="40" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1542981355456" expanded="true" signature="1181:1826" ph="..." />
-            <marker date="1542981355456" expanded="true" signature="1266:1826" ph="..." />
-            <marker date="1542981355456" expanded="true" signature="4203:4441" ph="..." />
+            <marker date="1543243888576" expanded="true" signature="1181:1808" ph="..." />
           </folding>
         </state>
       </provider>
