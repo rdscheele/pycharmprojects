@@ -44,6 +44,8 @@ for item in blob_list:
     if blob_name == blob_item:
         time.sleep(2)
         # Delete the item from the container
+        print('Container name ' + container_name)
+        print('Blob name ' + blob_name)
         block_blob_service.delete_blob(container_name=container_name, blob_name=blob_name)
         time.sleep(2)
         print(psutil.virtual_memory())

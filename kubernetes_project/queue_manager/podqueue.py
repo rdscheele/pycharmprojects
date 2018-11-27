@@ -5,6 +5,7 @@ from azure.servicebus import ServiceBusService
 from kubernetes import client, config
 import time
 
+# TODO: Setting environment variables in cluster. Cleanup this bit really.
 namespace = "default"
 
 service_bus_key = open('C:/Users/r.d.scheele/OneDrive - Betabit/Keys/service_bus_key.txt', 'r').read()
@@ -22,9 +23,16 @@ else:
 
 core = client.CoreV1Api()
 
+container_image = "rdscheele/wellprocessor:v20"
+
 
 # Deconstruct a queue message as list
-# Message format subdomain;messageId;numberOfMessagesInBatch;fakeCpuValueToBeUsed;fakeMemoryValueToBeUsed
+# Incoming message format is sub-domain;messageId;numberOfMessagesInBatch;fakeCpuValueToBeUsed;fakeMemoryValueToBeUsed
+# sub-domain = Name of the blob container in storage
+# messageId = Name of the item in the blob container storage
+# numberOfMessagesInBatch = The amount of messages that have been send in this batch
+# fakeCpuValueToBeUsed = Amount of times Pi is calculated in the well-processor, uses quite a bit of CPU
+# fakeMemoryToBeUsed = Size of byte array in the well-processor. Number corresponds to RAM with a max of 800.000.000
 def deconstruct_message(msg):
     msg_body = str(msg.body)
     msg_body = msg_body[2:]
@@ -37,6 +45,10 @@ def deconstruct_message(msg):
     return container_name, blob_item, cpu_usage, memory_usage
 
 
+# The pod YAML requires you to set a minimum CPU and Memory requirement.
+# The incoming message specifies how much memory and CPU the analysis requires.
+# This function sets min requirements for memory and min and max requirements for CPU
+# TODO: Make this less quick and dirty.
 def calculate_required_resources(cpu, memory):
     min_cpu = '0'
     max_cpu = '0'
@@ -50,30 +62,28 @@ def calculate_required_resources(cpu, memory):
         min_cpu = '.5'
         max_cpu = '1.0'
     min_mem = '0'
-    #max_mem = '0'
     if memory == '100000000':
         min_mem = '150Mi'
-        #max_mem = '150Mi'
     elif memory == '400000000':
         min_mem = '500Mi'
-        #max_mem = '850Mi'
     elif memory == '700000000':
         min_mem = '800Mi'
-        #max_mem = '2000Mi'
-    return min_cpu, max_cpu, min_mem#, max_mem
+    return min_cpu, max_cpu, min_mem
 
 
+# Specify a container that will be used by a pod.
 def make_container(msg, pod_id):
-    container = client.V1Container(name="worker")
-    container.image = "rdscheele/wellprocessor:v18"
-    # Declare required and max resources
+    # Get values that are needed to specify the container.
     container_name, blob_item, fake_cpu_usage, fake_memory_usage = deconstruct_message(msg)
     min_cpu, max_cpu, min_mem = calculate_required_resources(fake_cpu_usage, fake_memory_usage)
 
+    # Set the container config specifications
+    container = client.V1Container(name="worker")
+    container.image = container_image
     container.resources = client.V1ResourceRequirements()
     container.resources.requests = {'cpu': min_cpu, 'memory': min_mem}
-    #container.resources.limits = {'cpu': max_cpu, 'memory': max_mem}
-    # Declare environment variables with well id
+
+    # Set environment variables for the container.
     env_var_container_name = client.V1EnvVar(name='CONTAINER_NAME')
     env_var_container_name.value = container_name
     env_var_blob_item = client.V1EnvVar(name='BLOB_ITEM')
@@ -93,13 +103,19 @@ def make_container(msg, pod_id):
     return container
 
 
+# Specify a pod for creation.
 def make_pod(msg):
+    # Get values from the message
     container_name, blob_item, fake_cpu_usage, fake_memory_usage = deconstruct_message(msg)
+    # Created ID for pod
+    # TODO: Make ID based on datetime to avoid duplicate ID's
+    pod_id = ''.join(random.choices(string.ascii_lowercase, k=20))
+
+    # Set the pod config specifications
     pod = client.V1Job()
     pod.api_version = "v1"
     pod.kind = "Pod"
     pod.metadata = client.V1ObjectMeta()
-    pod_id = ''.join(random.choices(string.ascii_lowercase, k=20))
     pod.metadata.name = 'wellprocessor-' + fake_cpu_usage + '-' + fake_memory_usage + '-' + pod_id
     container = make_container(msg, pod_id)
     pod.spec = client.V1PodSpec(containers=[container])
