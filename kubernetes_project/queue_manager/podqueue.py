@@ -114,27 +114,7 @@ def update_queue(msg):
     core.create_namespaced_pod(namespace, pod)
 
 
-def cluster_resources():
-    pod_list = core.list_namespaced_pod(namespace='default')
-    node_list = core.list_node()
-    current_cpu = 0
-    current_cpu = 0
-    maximum_cpu = 0
-    maximum_ram = 0
-
-    return maximum_cpu, maximum_ram, current_cpu, current_cpu
-
-
 while True:
-    # Cleanup completed pods
-    pod_list = core.list_namespaced_pod(namespace='default')
-    '''
-    for item in pod_list.items:
-        if item.status.phase == 'Succeeded':
-            delete_options = client.V1DeleteOptions()
-            core.delete_namespaced_pod(name=item.metadata.name, namespace='default', body=delete_options)
-            print('Removed terminated pod!')'''
-
     message_count = bus_service.get_queue('wellqueue').message_count
 
     if message_count != 0:
@@ -143,7 +123,5 @@ while True:
         print('Creating a pod!')
         message = bus_service.receive_queue_message('wellqueue', peek_lock=False)
         update_queue(message)
-
-
 
     time.sleep(2)
