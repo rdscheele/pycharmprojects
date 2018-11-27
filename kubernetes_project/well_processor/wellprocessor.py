@@ -57,8 +57,8 @@ def remove_message(msg_blob_name):
         message = bus_service.receive_queue_message(queue_name='activequeue', peek_lock=True)
         msg_blob_item = deconstruct_message(message)
         if msg_blob_item == msg_blob_name:
-            run = False
             message.delete()
+            run = False
         if q > 5000:
             run = False
             print('Something really strange happened, getting this error is practically impossible.')

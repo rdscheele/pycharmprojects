@@ -24,7 +24,7 @@ else:
 
 core = client.CoreV1Api()
 
-container_image = "rdscheele/wellprocessor:v21"
+container_image = "rdscheele/wellprocessor:v25"
 
 
 # Deconstruct a queue message as list
@@ -64,11 +64,11 @@ def calculate_required_resources(cpu, memory):
         max_cpu = '1.0'
     min_mem = '0'
     if memory == '100000000':
-        min_mem = '150Mi'
+        min_mem = '125Mi'
     elif memory == '400000000':
-        min_mem = '500Mi'
+        min_mem = '425Mi'
     elif memory == '700000000':
-        min_mem = '800Mi'
+        min_mem = '725Mi'
     return min_cpu, max_cpu, min_mem
 
 
