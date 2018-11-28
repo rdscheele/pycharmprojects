@@ -154,4 +154,4 @@ while True:
     else:
         time.sleep(20)
 
-    time.sleep(2)
+    time.sleep(1)
