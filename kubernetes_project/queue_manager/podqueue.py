@@ -122,7 +122,7 @@ def make_pod(msg):
     pod.api_version = "v1"
     pod.kind = "Pod"
     pod.metadata = client.V1ObjectMeta()
-    pod.metadata.name = 'wellprocessor-' + fake_cpu_usage + '-' + fake_memory_usage + '-' + pod_id
+    pod.metadata.name = fake_memory_usage + '-wellprocessor-' + fake_cpu_usage + '-' + pod_id
     container = make_container(msg, pod_id)
     pod.spec = client.V1PodSpec(containers=[container])
     pod.spec.restart_policy = "OnFailure"
@@ -145,13 +145,26 @@ def update_queue():
     core.create_namespaced_pod(namespace, pod)
 
 
+# Check if there are any pods with status 'pending'
+def check_pending_pods():
+    pod_list = core.list_pod_for_all_namespaces().items
+    for item in pod_list:
+        if item.status.phase == 'Pending':
+            print('There is still a pending pod, waiting before creating another one.')
+            return True
+    return False
+
+
 while True:
     # See if there are any messages in the queue
-    message_count = bus_service.get_queue('wellqueue').message_count
-    if message_count != 0:
-        print('Creating a pod!')
-        update_queue()
-    else:
-        time.sleep(20)
+    pending = check_pending_pods()
+
+    if not pending:
+        message_count = bus_service.get_queue('wellqueue').message_count
+        if message_count != 0:
+            print('Creating a pod!')
+            update_queue()
+        else:
+            time.sleep(20)
 
     time.sleep(1)
