@@ -2,7 +2,10 @@ import unittest
 import queue_manager.podqueue as pq
 
 
-# Comment the while loop out when running the unit tests in podqueue.py
+""" 
+Series of tests.
+Comment the while loop out when running the unit tests in podqueue.py
+"""
 
 # Creating a message object
 def create_fake_message(message):

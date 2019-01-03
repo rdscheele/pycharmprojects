@@ -5,7 +5,18 @@ from decimal import Decimal, getcontext
 import psutil
 from azure.servicebus import ServiceBusService
 
-# Get environment variables. These will automatically be set in the YAML by the queue manager.
+
+"""
+The piece of code below makes this container do something. It is just an example.
+It has no practical use at all.
+If this code is ran in the k8s cluster as a container, some resources (memory and CPU) will be reserved for this 
+specific container. It will have status 'Running' when it is being executed.
+If the container has done it's job and the status changes to 'Succeeded' or 'Completed' the resources will be free
+once again.
+"""
+
+
+# Set environment variables if the environment this code is ran in is a k8s environment.
 if os.getenv('KUBERNETES_SERVICE_HOST'):
     # Name of the BLOB container in storage
     container_name = os.environ['CONTAINER_NAME']
@@ -15,7 +26,7 @@ if os.getenv('KUBERNETES_SERVICE_HOST'):
     storage_account_name = os.environ['STORAGE_ACCOUNT_NAME']
     storage_account_key = os.environ['STORAGE_ACCOUNT_KEY']
     # Memory to be used by this container. Integer where each number is one byte, will be byte array.
-    # Should never be set higher than 800.000.000 or 800MB
+    # Should never be set higher than 800.000.000 or 800MB (In this specific example -> the byte array will overflow)
     memory_usage = int(os.environ['FAKE_MEMORY_USAGE'])
     # CPU to be used by this container. Integer where each number is one calculation of pi.
     cpu_usage = int(os.environ['FAKE_CPU_USAGE'])
@@ -24,6 +35,7 @@ if os.getenv('KUBERNETES_SERVICE_HOST'):
     # Service bus credentials
     service_bus_key = os.environ['SERVICE_BUS_KEY']
     service_bus_namespace = os.environ['SERVICE_BUS_NAMESPACE']
+# Set environment variables if the environment this code is ran in is NOT a k8s environment. (Ran locally)
 else:
     container_name = 'test'
     with open('C:/Users/r.d.scheele/OneDrive - Betabit/Keys/storage_account_key.txt', 'r') as myfile:
@@ -114,4 +126,5 @@ for item in blob_list:
         block_blob_service.delete_blob(container_name=container_name, blob_name=blob_name)
         time.sleep(2)
         print(psutil.virtual_memory())
-        # Done. Pod should terminate successfully here.
+        # Done. Pod should have terminated successfully here with status 'Succeeded' or 'Completed'.
+        # The resources that were specified as 'min CPU' and 'min memory' should be free in the cluster again.

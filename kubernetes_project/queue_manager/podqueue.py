@@ -6,26 +6,44 @@ from kubernetes import client, config
 import time
 import datetime
 
-# TODO: Setting environment variables in cluster. Cleanup this bit really.
-namespace = "default"
 
-service_bus_key = open('C:/Users/r.d.scheele/OneDrive - Betabit/Keys/service_bus_key.txt', 'r').read()
+""" 
+This function is the so called 'manager'.
+It can be ran locally or as a deployment inside a k8s cluster.
+"""
+
+
+# Variables
+namespace = "default"
+service_bus_key_lcation = 'C:/Users/r.d.scheele/OneDrive - Betabit/Keys/service_bus_key.txt'
 service_bus_namespace = 'wellprototype'
+storage_account_name = 'bbwelldata'
+storage_account_key_lcation = 'C:/Users/r.d.scheele/OneDrive - Betabit/Keys/storage_account_key.txt'
+# The image I am using for my containers. If you have build your own docker image it should be changed.
+# If not just leave it.
+container_image = "rdscheele/wellprocessor:v25"
+
+
+# Service bus variables.
+service_bus_key = open(service_bus_key_lcation, 'r').read()
 bus_service = ServiceBusService(
     service_namespace=service_bus_namespace,
     shared_access_key_name='master',
     shared_access_key_value=service_bus_key)
-storage_account_name = 'bbwelldata'
-storage_account_key = open('C:/Users/r.d.scheele/OneDrive - Betabit/Keys/storage_account_key.txt', 'r').read()
 
+# Storage account variables.
+storage_account_key = open(storage_account_key_lcation, 'r').read()
+
+# If ran outside of the k8s cluster, load config from outside the cluster.
+# Requires Azure CLI. Make sure you've ran 'az aks get-credentials' for your cluster.
+# If ran inside k8s cluster, just load config from inside the cluster.
 if os.getenv('KUBERNETES_SERVICE_HOST'):
     config.load_incluster_config()
 else:
     config.load_kube_config()
 
+# Load the API functions.
 core = client.CoreV1Api()
-
-container_image = "rdscheele/wellprocessor:v25"
 
 
 # Deconstruct a queue message as list
@@ -44,12 +62,13 @@ def deconstruct_message(msg):
     blob_item = msg_list[1]
     cpu_usage = msg_list[3]
     memory_usage = msg_list[4]
+    # Returns single variables for items in the message.
     return container_name, blob_item, cpu_usage, memory_usage
 
 
-# The pod YAML requires you to set a minimum CPU and Memory requirement.
-# The incoming message specifies how much memory and CPU the analysis requires.
-# This function sets min requirements for memory and min and max requirements for CPU
+# The container requires you to set a minimum CPU and Memory requirement.
+# The incoming message specifies how much memory and CPU the message requires.
+# The min_mem and min_cpu should be the minimum required resources the analysis requires.
 # TODO: Make this less quick and dirty.
 def calculate_required_resources(cpu, memory):
     min_cpu = '0'
@@ -75,8 +94,9 @@ def calculate_required_resources(cpu, memory):
 
 # Specify a container that will be used by a pod.
 def make_container(msg, pod_id):
-    # Get values that are needed to specify the container.
+    # Get values from the message for the container.
     container_name, blob_item, fake_cpu_usage, fake_memory_usage = deconstruct_message(msg)
+    # Calculate the resource requirements for this message.
     min_cpu, max_cpu, min_mem = calculate_required_resources(fake_cpu_usage, fake_memory_usage)
 
     # Set the container config specifications
@@ -116,7 +136,7 @@ def make_pod(msg):
     container_name, blob_item, fake_cpu_usage, fake_memory_usage = deconstruct_message(msg)
     # Created ID for pod
     # TODO: Make ID based on datetime to avoid duplicate ID's.
-    # If k8s receives a pod with a name that already exists the pod won't be scheduled
+    # NOTE: If k8s receives a pod with a name that already exists the pod won't be scheduled.
     pod_id = ''.join(random.choices(string.ascii_lowercase, k=20))
 
     # Set the pod config specifications
@@ -125,44 +145,49 @@ def make_pod(msg):
     pod.kind = "Pod"
     pod.metadata = client.V1ObjectMeta()
     pod.metadata.name = fake_memory_usage + '-wellprocessor-' + fake_cpu_usage + '-' + pod_id
+    # Create and declare the container that is going to be used.
     container = make_container(msg, pod_id)
     pod.spec = client.V1PodSpec(containers=[container])
+    # Set a restart policy.
+    # NOTE: These pods will infinitely restart on failure, it is probably better to set a max restarts.
     pod.spec.restart_policy = "OnFailure"
     pod.spec.termination_grace_period_seconds = 30
     print('Created pod for message ' + str(msg.body) + ' with ID ' + pod_id)
     return pod
 
 
-# Read the message and send it to the active message queue
+# Read the message from the service bus queue. Send message to new service bus queue.
 def read_message():
     message = bus_service.receive_queue_message(queue_name='wellqueue', peek_lock=False)
     bus_service.send_queue_message(queue_name='activequeue', message=message)
     return message
 
 
-# Create a pod and remove the queue message
+# This is called when a new pod can be created.
 def update_queue():
     msg = read_message()
     pod = make_pod(msg)
     core.create_namespaced_pod(namespace, pod)
 
 
-# Check if there are any pods with status 'pending'
+# Check if there are any pods with status 'pending'.
 def check_pending_pods():
     pod_list = core.list_pod_for_all_namespaces().items
     for item in pod_list:
         if item.status.phase == 'Pending':
-            #print('There is still a pending pod, waiting before creating another one.')
             return True
     return False
 
+
 start_time = datetime.datetime.now()
 
+# The loop that this function wil run.
 while True:
-    # See if there are any messages in the queue
+    # See if there are pods with 'pending' status in the queue currently.
     pending = check_pending_pods()
 
     if not pending:
+        # Check if there are messages in the service bus queue.
         message_count = bus_service.get_queue('wellqueue').message_count
         if message_count != 0:
             new_time = datetime.datetime.now()
