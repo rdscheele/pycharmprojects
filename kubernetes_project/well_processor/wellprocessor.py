@@ -82,11 +82,6 @@ for item in blob_list:
     blob_name = item.name
     if blob_name == blob_item:
         time.sleep(2)
-        # Delete the item from the container
-        print('Container name ' + container_name)
-        print('Blob name ' + blob_name)
-        block_blob_service.delete_blob(container_name=container_name, blob_name=blob_name)
-        time.sleep(2)
         print(psutil.virtual_memory())
         time.sleep(2)
         time_start = time.time()
@@ -112,6 +107,11 @@ for item in blob_list:
         time.sleep(2)
         print('Time required to run this container was ' + str(time_diff) + ' seconds for BLOB container item '
               + str(blob_item))
+        time.sleep(600)
+        # Delete the item from the container
+        print('Container name ' + container_name)
+        print('Blob name ' + blob_name)
+        block_blob_service.delete_blob(container_name=container_name, blob_name=blob_name)
         time.sleep(2)
         print(psutil.virtual_memory())
         # Done. Pod should terminate successfully here.

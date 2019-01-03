@@ -4,6 +4,7 @@ import string
 from azure.servicebus import ServiceBusService
 from kubernetes import client, config
 import time
+import datetime
 
 # TODO: Setting environment variables in cluster. Cleanup this bit really.
 namespace = "default"
@@ -114,7 +115,8 @@ def make_pod(msg):
     # Get values from the message
     container_name, blob_item, fake_cpu_usage, fake_memory_usage = deconstruct_message(msg)
     # Created ID for pod
-    # TODO: Make ID based on datetime to avoid duplicate ID's
+    # TODO: Make ID based on datetime to avoid duplicate ID's.
+    # If k8s receives a pod with a name that already exists the pod won't be scheduled
     pod_id = ''.join(random.choices(string.ascii_lowercase, k=20))
 
     # Set the pod config specifications
@@ -150,10 +152,11 @@ def check_pending_pods():
     pod_list = core.list_pod_for_all_namespaces().items
     for item in pod_list:
         if item.status.phase == 'Pending':
-            print('There is still a pending pod, waiting before creating another one.')
+            #print('There is still a pending pod, waiting before creating another one.')
             return True
     return False
 
+start_time = datetime.datetime.now()
 
 while True:
     # See if there are any messages in the queue
@@ -162,7 +165,10 @@ while True:
     if not pending:
         message_count = bus_service.get_queue('wellqueue').message_count
         if message_count != 0:
-            print('Creating a pod!')
+            new_time = datetime.datetime.now()
+            time_difference = new_time - start_time
+            start_time = datetime.datetime.now()
+            print('Creating pod. Timediff between now and previous pod is ' + str(time_difference) + ' seconds.')
             update_queue()
         else:
             time.sleep(20)
