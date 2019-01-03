@@ -1,0 +1,6 @@
+[
+  "testfile.py::TestMessage::test_deconstruct_msg",
+  "testfile.py::TestContainer::test_container_env_vars",
+  "testfile.py::TestContainer::test_container_vars",
+  "testfile.py::TestContainer::test_make_container"
+]
